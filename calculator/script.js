@@ -5,6 +5,7 @@ const equals = document.querySelector('.equals');
 const clear = document.querySelector('.clear');
 const negative = document.querySelector('.negative');
 const percent = document.querySelector('.percent');
+const dot = document.querySelector('.dot');
 
 let firstValue = "";
 let isFirstValue = false;
@@ -12,31 +13,37 @@ let secondValue = "";
 let isSecondValue = false;
 let sign = "";
 let resultValue = 0;
+let isOperatorClicked = false;
 
 for (let i = 0; i < numbers.length; i++) {
     numbers[i].addEventListener('click', (e) => {
         let atr = e.target.getAttribute('value');
-        if (isFirstValue === false) {
+        if (!isOperatorClicked) {
             getFirstValue(atr);
-        }
-        if (isSecondValue == false) {
+        } else {
             getSecondValue(atr);
         }
-    })
+    });
 }
 
 function getFirstValue(el) {
     result.innerHTML = "";
-    firstValue += el;
+    if (firstValue === "0") {
+        firstValue = el;
+    } else {
+        firstValue += el;
+    }
     result.innerHTML = firstValue;
-    firstValue = +firstValue;
 }
 
 function getSecondValue(el) {
     if (firstValue != "" && sign != "") {
-        secondValue += el;
+        if (secondValue === "0") {
+            secondValue = el;
+        } else {
+            secondValue += el;
+        }
         result.innerHTML = secondValue;
-        secondValue = +secondValue;
     }
 }
 
@@ -44,7 +51,7 @@ function getSign() {
     for (let i = 0; i < signs.length; i++) {
         signs[i].addEventListener('click', (e) => {
             sign = e.target.getAttribute('value');
-            isFirstValue = true;
+            isOperatorClicked = true;
         })
     }
 }
@@ -52,27 +59,27 @@ getSign();
 
 equals.addEventListener('click', () => {
     result.innerHTML = "";
+    let firstNum = parseFloat(firstValue);
+    let secondNum = parseFloat(secondValue);
     if (sign === "+") {
-        resultValue = firstValue + secondValue;
+        resultValue = firstNum + secondNum;
     } else if (sign === "-") {
-        resultValue = firstValue - secondValue;
+        resultValue = firstNum - secondNum;
     } else if (sign === "x") {
-        resultValue = firstValue * secondValue;
+        resultValue = firstNum * secondNum;
     } else if (sign === "/") {
-        resultValue = firstValue / secondValue;
+        resultValue = firstNum / secondNum;
     }
     result.innerHTML = resultValue;
-    firstValue = resultValue;
+    firstValue = resultValue.toString();
     secondValue = "";
-
     checkResultLength();
-})
+});
 
 function checkResultLength() {
-    resultValue = JSON.stringify(resultValue);
-    if (resultValue.length >= 8) {
-        resultValue = JSON.parse(resultValue);
-        result.innerHTML = resultValue.toFixed(5);
+    let numResultValue = parseFloat(resultValue);
+    if (numResultValue.toString().length >= 8) {
+        result.innerHTML = numResultValue.toFixed(5);
     }
 }
 
@@ -86,4 +93,35 @@ negative.addEventListener('click', () => {
         resultValue = -resultValue;
     }
     result.innerHTML = resultValue;
-})
+});
+
+percent.addEventListener('click', () => {
+    result.innerHTML = "";
+    if (firstValue != "") {
+        resultValue = firstValue / 100;
+        firstValue = resultValue;
+    }
+    if (firstValue != "" && secondValue != "" && sign != "") {
+        resultValue = resultValue / 100;
+    }
+    result.innerHTML = resultValue;
+});
+
+clear.addEventListener('click', () => {
+    result.innerHTML = "0";
+    firstValue = "";
+    secondValue = "";
+    sign = "";
+    isOperatorClicked = false;
+    resultValue = 0;
+});
+
+dot.addEventListener('click', () => {
+    if (!isOperatorClicked && typeof firstValue === 'string' && !firstValue.includes('.')) {
+        firstValue += '.';
+        result.innerHTML = firstValue;
+    } else if (isOperatorClicked && typeof secondValue === 'string' && !secondValue.includes('.')) {
+        secondValue += '.';
+        result.innerHTML = secondValue;
+    }
+});
