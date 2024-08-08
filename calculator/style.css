@@ -21,11 +21,14 @@ html, body #fullheight {
     align-items: flex-end;
     color: white;
     height: 39%;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .result span {
-    margin-right: 60px;
-    font-size: 210px;
+    margin-top: 30px;
+    margin-right: 50px;
+    font-size: 30vw;
     justify-self: flex-end;
 }
 
@@ -35,21 +38,24 @@ html, body #fullheight {
     background-color: black;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .item {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 100px;
+    font-size: 10vw;
     color: white;
     border-radius: 100%;
-    width: 210px;
-    height: 210px;
+    width: 23vw;
+    height: 23vw;
     padding: 10px;
     cursor: pointer;
     align-self: center;
     justify-self: center;
+    margin-bottom: 35px;
 }
 
 .percent {
@@ -79,8 +85,8 @@ html, body #fullheight {
 
 .itemZero {
     background-color: #343434;
-    width: 435px;
-    border-radius: 135px;
+    width: 200px;
+    border-radius: 80px;
     grid-column: span 2;
     border: none;
 }
