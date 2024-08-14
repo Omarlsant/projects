@@ -527,3 +527,49 @@ input[type=radio]{
     --swatch-s1: hsl(var(--gold), 100%, 50%);
     --swatch-s2: hsl(var(--gold), 100%, 50%);
 }
+
+.swatch[for=space-black] {
+    --swatch-s1: hsl(var(--space-black), 50%, 20%);
+    --swatch-s2: hsl(var(--space-black), 50%, 10%);
+}
+
+.swatch[for=space-black]:before{
+    opacity: 0.5;
+}
+
+.swatch[for=silver] {
+    --swatch-s1: hsl(var(--silver), 50%, 80%);
+    --swatch-s2: hsl(var(--silver), 50%, 10%);
+}
+
+.swatch[for=silver]:before{
+    opacity: 0.75;
+}
+
+.deep-purple{
+    --c-h: var(--deep-purple);
+    --g-hue-adjust: 60;
+}
+
+.gold{
+    --c-h: var(--gold);
+    --g-hue-adjust-2: -100;
+}
+
+.space-black{
+    --c-h: var(--space-black);
+    --g-hue-adjust: 190;
+    --g-hue-adjust-2: 145;
+    --g-lightness: 95%;
+}
+
+.silver{
+    --c-h: var(--silver);
+    --c-s: 10%;
+    --g-hue-adjust: 30;
+    --g-lightness: 95%;
+}
+
+.silver .glow{
+    opacity: 0.25;
+}
