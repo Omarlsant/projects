@@ -298,8 +298,7 @@ body {
     will-change: max-width, max-height, filter;
 }
 
-.notch {
-    margin-top: 6px;
+.notch {margin-top: 5px;
     position: relative;
     background: black;
     border-radius: var(--notch-radius);
